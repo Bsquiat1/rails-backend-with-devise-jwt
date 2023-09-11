@@ -633,3 +633,691 @@ Migrating to AddRoleToUsers (20230910202008)
   [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Pluck (0.1ms)[0m  [1m[34mSELECT "users"."role" FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "role" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2023-09-10 20:54:45.164873"], ["role", "admin"], ["id", 3]]
+  [1m[36mTRANSACTION (20.2ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/member_details" for ::1 at 2023-09-10 23:57:39 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 31ms (Views: 0.7ms | ActiveRecord: 0.8ms | Allocations: 39196)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 00:23:46 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.2ms)[0m  [1m[34mSELECT "companies".* FROM "companies"[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:8:in `index'
+Completed 200 OK in 23ms (Views: 9.5ms | ActiveRecord: 1.2ms | Allocations: 21763)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 00:27:41 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.3ms)[0m  [1m[34mSELECT "companies".* FROM "companies"[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:8:in `index'
+Completed 200 OK in 84ms (Views: 34.5ms | ActiveRecord: 2.3ms | Allocations: 57426)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Update (0.4ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "role" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2023-09-10 21:30:22.082859"], ["role", "manager"], ["id", 3]]
+  [1m[36mTRANSACTION (30.9ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/member_details" for ::1 at 2023-09-11 00:31:17 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 10ms (Views: 0.4ms | ActiveRecord: 0.8ms | Allocations: 4890)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 00:31:23 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 9ms (ActiveRecord: 0.1ms | Allocations: 5588)
+
+
+  
+CanCan::AccessDenied (You are not authorized to access this page.):
+  
+cancancan (3.5.0) lib/cancan/ability.rb:180:in `authorize!'
+cancancan (3.5.0) lib/cancan/controller_additions.rb:339:in `authorize!'
+cancancan (3.5.0) lib/cancan/controller_resource.rb:40:in `authorize_resource'
+cancancan (3.5.0) lib/cancan/controller_resource.rb:34:in `load_and_authorize_resource'
+cancancan (3.5.0) lib/cancan/controller_resource.rb:17:in `block in add_before_action'
+activesupport (7.0.8) lib/active_support/callbacks.rb:467:in `instance_exec'
+activesupport (7.0.8) lib/active_support/callbacks.rb:467:in `block in make_lambda'
+activesupport (7.0.8) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.8) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8) lib/active_support/callbacks.rb:106:in `run_callbacks'
+actionpack (7.0.8) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8) lib/abstract_controller/base.rb:151:in `process'
+actionpack (7.0.8) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:852:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware/token_dispatcher.rb:20:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware/revocation_manager.rb:21:in `call'
+rack (2.2.8) lib/rack/builder.rb:244:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware.rb:22:in `call'
+rack (2.2.8) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.8) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.8) lib/rack/etag.rb:27:in `call'
+rack (2.2.8) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.8) lib/rack/head.rb:12:in `call'
+activerecord (7.0.8) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (7.0.8) lib/rails/engine.rb:530:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 00:35:01 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 19ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 7082)
+
+
+Started GET "/customers" for 127.0.0.1 at 2023-09-11 17:14:00 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/customers"):
+  
+Started GET "/customers" for 127.0.0.1 at 2023-09-11 17:14:00 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/customers"):
+  
+Started GET "/customers" for 127.0.0.1 at 2023-09-11 17:14:01 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/customers"):
+  
+Started GET "/customers" for 127.0.0.1 at 2023-09-11 17:14:01 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/customers"):
+  
+Started GET "/users" for 127.0.0.1 at 2023-09-11 17:14:03 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users" for 127.0.0.1 at 2023-09-11 17:14:03 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 17:15:08 +0300
+Processing by Api::V1::CompaniesController#index as */*
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 870)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-11 17:15:20 +0300
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"user11@example.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"user11@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "user11@example.com"], ["LIMIT", 1]]
+Completed 200 OK in 229ms (Views: 0.4ms | ActiveRecord: 0.8ms | Allocations: 21295)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 17:15:39 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 1381)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 17:15:49 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 14ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 4284)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-09-11 17:20:20 +0300
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 14ms (ActiveRecord: 1.2ms | Allocations: 5177)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/users/sessions_controller.rb:16:in `respond_to_on_destroy'
+Started DELETE "/users/sign_out" for ::1 at 2023-09-11 17:20:30 +0300
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.1ms | Allocations: 1487)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/users/sessions_controller.rb:16:in `respond_to_on_destroy'
+Started GET "/member_details" for ::1 at 2023-09-11 17:20:41 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 4ms (Views: 1.0ms | ActiveRecord: 0.1ms | Allocations: 1344)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 17:20:42 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 5ms (Views: 1.2ms | ActiveRecord: 0.1ms | Allocations: 1325)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 17:20:44 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 1320)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-09-11 17:20:50 +0300
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.1ms | Allocations: 1479)
+
+
+  
+JWT::ExpiredSignature (Signature has expired):
+  
+app/controllers/users/sessions_controller.rb:16:in `respond_to_on_destroy'
+Started POST "/api/v1/companies" for ::1 at 2023-09-11 17:21:19 +0300
+Processing by Api::V1::CompaniesController#create as */*
+  Parameters: {"company"=>{"name"=>"my company 2", "address"=>"nairobi, Kenya", "established_year"=>"2024"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 16702)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "role" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2023-09-11 14:22:57.992165"], ["role", "super_admin"], ["id", 3]]
+  [1m[36mTRANSACTION (16.4ms)[0m  [1m[36mcommit transaction[0m
+Started POST "/api/v1/companies" for ::1 at 2023-09-11 17:23:33 +0300
+Processing by Api::V1::CompaniesController#create as */*
+  Parameters: {"company"=>{"name"=>"my company 2", "address"=>"nairobi, Kenya", "established_year"=>"2024"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+  [1m[36mCompany Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "companies" WHERE "companies"."name" = ? LIMIT ?[0m  [["name", "my company 2"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+Completed 422 Unprocessable Entity in 22ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 9255)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 17:23:48 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies"[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 1.2ms | ActiveRecord: 0.2ms | Allocations: 2583)
+
+
+Started POST "/api/v1/companies" for ::1 at 2023-09-11 17:25:56 +0300
+Processing by Api::V1::CompaniesController#create as */*
+  Parameters: {"company"=>{"name"=>"my company 2", "address"=>"nairobi, Kenya", "established_year"=>"2024", "user_id"=>2}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: create, request: #<ActionDispatch::Request:0x00005649338a6ad8>, params: {"company"=>{"name"=>"my company 2", "address"=>"nairobi, Kenya", "established_year"=>"2024", "user_id"=>2}, "controller"=>"api/v1/companies", "action"=>"create"} }[0m
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: create, request: #<ActionDispatch::Request:0x00005649338a6ad8>, params: {"company"=>{"name"=>"my company 2", "address"=>"nairobi, Kenya", "established_year"=>"2024", "user_id"=>2}, "controller"=>"api/v1/companies", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+  [1m[36mCompany Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "companies" WHERE "companies"."name" = ? LIMIT ?[0m  [["name", "my company 2"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+Completed 422 Unprocessable Entity in 15ms (Views: 0.2ms | ActiveRecord: 1.2ms | Allocations: 10190)
+
+
+Started POST "/api/v1/companies" for ::1 at 2023-09-11 17:26:09 +0300
+Processing by Api::V1::CompaniesController#create as */*
+  Parameters: {"company"=>{"name"=>"my company 3", "address"=>"nairobi, Kenya", "established_year"=>"2024", "user_id"=>2}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: create, request: #<ActionDispatch::Request:0x00007f19fcdad2d0>, params: {"company"=>{"name"=>"my company 3", "address"=>"nairobi, Kenya", "established_year"=>"2024", "user_id"=>2}, "controller"=>"api/v1/companies", "action"=>"create"} }[0m
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: create, request: #<ActionDispatch::Request:0x00007f19fcdad2d0>, params: {"company"=>{"name"=>"my company 3", "address"=>"nairobi, Kenya", "established_year"=>"2024", "user_id"=>2}, "controller"=>"api/v1/companies", "action"=>"create"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+  [1m[36mCompany Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "companies" WHERE "companies"."name" = ? LIMIT ?[0m  [["name", "my company 3"], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+  [1m[36mCompany Create (0.3ms)[0m  [1m[32mINSERT INTO "companies" ("name", "established_year", "address", "user_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "my company 3"], ["established_year", "2024"], ["address", "nairobi, Kenya"], ["user_id", 3], ["created_at", "2023-09-11 14:26:09.082205"], ["updated_at", "2023-09-11 14:26:09.082205"]]
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+  [1m[36mTRANSACTION (33.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:18:in `create'
+Completed 200 OK in 45ms (Views: 0.3ms | ActiveRecord: 33.8ms | Allocations: 4574)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 17:26:36 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies"[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 1.2ms | ActiveRecord: 0.2ms | Allocations: 2711)
+
+
+Started PATCH "/api/v1/companies/3" for ::1 at 2023-09-11 17:28:00 +0300
+Processing by Api::V1::CompaniesController#update as */*
+  Parameters: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Company Load (0.0ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:51:in `set_company'
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: update, request: #<ActionDispatch::Request:0x00007f19fcbc2808>, params: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "controller"=>"api/v1/companies", "action"=>"update", "id"=>"3"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mCompany Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "companies" WHERE "companies"."name" = ? AND "companies"."id" != ? LIMIT ?[0m  [["name", "krunchy "], ["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mCompany Update (0.2ms)[0m  [1m[33mUPDATE "companies" SET "name" = ?, "established_year" = ?, "address" = ?, "updated_at" = ? WHERE "companies"."id" = ?[0m  [["name", "krunchy "], ["established_year", "2009"], ["address", "kisumu, Kenya"], ["updated_at", "2023-09-11 14:28:00.417478"], ["id", 3]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (9.4ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 10.4ms | Allocations: 6509)
+
+
+Started DELETE "/api/v1/companies/3" for ::1 at 2023-09-11 17:28:57 +0300
+Processing by Api::V1::CompaniesController#destroy as */*
+  Parameters: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE Company Load (0.0ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:51:in `set_company'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:38:in `destroy'
+  [1m[36mCompany Destroy (0.2ms)[0m  [1m[31mDELETE FROM "companies" WHERE "companies"."id" = ?[0m  [["id", 3]]
+  ↳ app/controllers/api/v1/companies_controller.rb:38:in `destroy'
+  [1m[36mTRANSACTION (32.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:38:in `destroy'
+Completed 200 OK in 38ms (Views: 0.2ms | ActiveRecord: 32.7ms | Allocations: 4002)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 17:30:40 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 0.4ms | Allocations: 1330)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 17:33:21 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies"[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:8:in `index'
+Completed 200 OK in 17ms (Views: 4.7ms | ActiveRecord: 1.4ms | Allocations: 9637)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-09-11 17:35:26 +0300
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:17:in `respond_to_on_destroy'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 2301)
+
+
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Update (17.4ms)[0m  [1m[33mUPDATE "users" SET "jti" = ? WHERE "users"."id" = ?[0m  [["jti", "065dfb43-82e3-4b42-88f7-db9c16d54374"], ["id", 3]]
+Started GET "/member_details" for ::1 at 2023-09-11 17:35:58 +0300
+Processing by MembersController#index as */*
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 235)
+
+
+Started POST "/users/sign_in" for ::1 at 2023-09-11 17:37:31 +0300
+Processing by Users::SessionsController#create as */*
+  Parameters: {"user"=>{"email"=>"user11@example.com", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"email"=>"user11@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "user11@example.com"], ["LIMIT", 1]]
+Completed 200 OK in 245ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 1696)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 17:41:56 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies"[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:8:in `index'
+Completed 200 OK in 15ms (Views: 3.6ms | ActiveRecord: 1.4ms | Allocations: 9616)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 17:42:20 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.1ms | Allocations: 1332)
+
+
+Started PATCH "/api/v1/companies/3" for ::1 at 2023-09-11 17:44:48 +0300
+Processing by Api::V1::CompaniesController#update as */*
+  Parameters: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "id"=>"3"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.2ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 404 Not Found in 5ms (ActiveRecord: 0.3ms | Allocations: 2241)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find Company with 'id'=3):
+  
+activerecord (7.0.8) lib/active_record/core.rb:284:in `find'
+cancancan (3.5.0) lib/cancan/model_adapters/abstract_adapter.rb:24:in `find'
+cancancan (3.5.0) lib/cancan/controller_resource_finder.rb:13:in `find_resource'
+cancancan (3.5.0) lib/cancan/controller_resource_loader.rb:110:in `load_resource_instance'
+cancancan (3.5.0) lib/cancan/controller_resource_loader.rb:18:in `load_resource'
+cancancan (3.5.0) lib/cancan/controller_resource.rb:33:in `load_and_authorize_resource'
+cancancan (3.5.0) lib/cancan/controller_resource.rb:17:in `block in add_before_action'
+activesupport (7.0.8) lib/active_support/callbacks.rb:467:in `instance_exec'
+activesupport (7.0.8) lib/active_support/callbacks.rb:467:in `block in make_lambda'
+activesupport (7.0.8) lib/active_support/callbacks.rb:199:in `block (2 levels) in halting'
+actionpack (7.0.8) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.0.8) lib/active_support/callbacks.rb:200:in `block in halting'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `block in invoke_before'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `each'
+activesupport (7.0.8) lib/active_support/callbacks.rb:595:in `invoke_before'
+activesupport (7.0.8) lib/active_support/callbacks.rb:106:in `run_callbacks'
+actionpack (7.0.8) lib/abstract_controller/callbacks.rb:233:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/rescue.rb:23:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/instrumentation.rb:67:in `block in process_action'
+activesupport (7.0.8) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.0.8) lib/active_support/notifications/instrumenter.rb:24:in `instrument'
+activesupport (7.0.8) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.0.8) lib/action_controller/metal/instrumentation.rb:66:in `process_action'
+actionpack (7.0.8) lib/action_controller/metal/params_wrapper.rb:259:in `process_action'
+activerecord (7.0.8) lib/active_record/railties/controller_runtime.rb:27:in `process_action'
+actionpack (7.0.8) lib/abstract_controller/base.rb:151:in `process'
+actionpack (7.0.8) lib/action_controller/metal.rb:188:in `dispatch'
+actionpack (7.0.8) lib/action_controller/metal.rb:251:in `dispatch'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:50:in `block in serve'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (7.0.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.0.8) lib/action_dispatch/routing/route_set.rb:852:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware/token_dispatcher.rb:20:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware/revocation_manager.rb:21:in `call'
+rack (2.2.8) lib/rack/builder.rb:244:in `call'
+warden-jwt_auth (0.8.0) lib/warden/jwt_auth/middleware.rb:22:in `call'
+rack (2.2.8) lib/rack/session/abstract/id.rb:266:in `context'
+rack (2.2.8) lib/rack/session/abstract/id.rb:260:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/cookies.rb:704:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.8) lib/rack/etag.rb:27:in `call'
+rack (2.2.8) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.8) lib/rack/head.rb:12:in `call'
+activerecord (7.0.8) lib/active_record/migration.rb:638:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (7.0.8) lib/active_support/callbacks.rb:99:in `run_callbacks'
+actionpack (7.0.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/debug_exceptions.rb:28:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/show_exceptions.rb:29:in `call'
+railties (7.0.8) lib/rails/rack/logger.rb:40:in `call_app'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `block in call'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `block in tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:37:in `tagged'
+activesupport (7.0.8) lib/active_support/tagged_logging.rb:99:in `tagged'
+railties (7.0.8) lib/rails/rack/logger.rb:25:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/remote_ip.rb:93:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/request_id.rb:26:in `call'
+rack (2.2.8) lib/rack/runtime.rb:22:in `call'
+activesupport (7.0.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (7.0.8) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/static.rb:23:in `call'
+rack (2.2.8) lib/rack/sendfile.rb:110:in `call'
+actionpack (7.0.8) lib/action_dispatch/middleware/host_authorization.rb:138:in `call'
+rack-cors (2.0.1) lib/rack/cors.rb:102:in `call'
+railties (7.0.8) lib/rails/engine.rb:530:in `call'
+puma (5.6.7) lib/puma/configuration.rb:252:in `call'
+puma (5.6.7) lib/puma/request.rb:77:in `block in handle_request'
+puma (5.6.7) lib/puma/thread_pool.rb:340:in `with_force_shutdown'
+puma (5.6.7) lib/puma/request.rb:76:in `handle_request'
+puma (5.6.7) lib/puma/server.rb:443:in `process_client'
+puma (5.6.7) lib/puma/thread_pool.rb:147:in `block in spawn_thread'
+Started PATCH "/api/v1/companies/4" for ::1 at 2023-09-11 17:45:11 +0300
+Processing by Api::V1::CompaniesController#update as */*
+  Parameters: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "id"=>"4"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE Company Load (0.0ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:51:in `set_company'
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: update, request: #<ActionDispatch::Request:0x00007f19ec44b558>, params: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "controller"=>"api/v1/companies", "action"=>"update", "id"=>"4"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mCompany Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "companies" WHERE "companies"."name" = ? AND "companies"."id" != ? LIMIT ?[0m  [["name", "krunchy "], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mCompany Update (0.2ms)[0m  [1m[33mUPDATE "companies" SET "name" = ?, "established_year" = ?, "address" = ?, "updated_at" = ? WHERE "companies"."id" = ?[0m  [["name", "krunchy "], ["established_year", "2009"], ["address", "kisumu, Kenya"], ["updated_at", "2023-09-11 14:45:11.488866"], ["id", 4]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (29.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+Completed 200 OK in 42ms (Views: 0.3ms | ActiveRecord: 29.8ms | Allocations: 6642)
+
+
+Started PATCH "/api/v1/companies/2" for ::1 at 2023-09-11 17:45:17 +0300
+Processing by Api::V1::CompaniesController#update as */*
+  Parameters: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Company Load (0.0ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:51:in `set_company'
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: update, request: #<ActionDispatch::Request:0x00007f19e0226630>, params: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "controller"=>"api/v1/companies", "action"=>"update", "id"=>"2"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mCompany Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "companies" WHERE "companies"."name" = ? AND "companies"."id" != ? LIMIT ?[0m  [["name", "krunchy "], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+Completed 422 Unprocessable Entity in 12ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 5906)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ?, "role" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2023-09-11 14:48:20.907331"], ["role", "admin"], ["id", 3]]
+  [1m[36mTRANSACTION (16.3ms)[0m  [1m[36mcommit transaction[0m
+Started GET "/member_details" for ::1 at 2023-09-11 17:48:31 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 1309)
+
+
+Started POST "/api/v1/companies" for ::1 at 2023-09-11 17:48:36 +0300
+Processing by Api::V1::CompaniesController#create as */*
+  Parameters: {"company"=>{"name"=>"my company 3", "address"=>"nairobi, Kenya", "established_year"=>"2024", "user_id"=>2}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: create, request: #<ActionDispatch::Request:0x00007f19f80624d0>, params: {"company"=>{"name"=>"my company 3", "address"=>"nairobi, Kenya", "established_year"=>"2024", "user_id"=>2}, "controller"=>"api/v1/companies", "action"=>"create"} }[0m
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 1947)
+
+
+Started GET "/api/v1/companies" for ::1 at 2023-09-11 17:48:41 +0300
+Processing by Api::V1::CompaniesController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.1ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."user_id" = ?[0m  [["user_id", 3]]
+  ↳ app/controllers/api/v1/companies_controller.rb:8:in `index'
+Completed 200 OK in 4ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 2720)
+
+
+Started PATCH "/api/v1/companies/2" for ::1 at 2023-09-11 17:48:55 +0300
+Processing by Api::V1::CompaniesController#update as */*
+  Parameters: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "id"=>"2"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCompany Load (0.2ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE Company Load (0.0ms)[0m  [1m[34mSELECT "companies".* FROM "companies" WHERE "companies"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:51:in `set_company'
+[31mUnpermitted parameter: :user_id. Context: { controller: Api::V1::CompaniesController, action: update, request: #<ActionDispatch::Request:0x00007f19e47caf88>, params: {"company"=>{"name"=>"krunchy ", "address"=>"kisumu, Kenya", "established_year"=>"2009", "user_id"=>3}, "controller"=>"api/v1/companies", "action"=>"update", "id"=>"2"} }[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mCompany Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "companies" WHERE "companies"."name" = ? AND "companies"."id" != ? LIMIT ?[0m  [["name", "krunchy "], ["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/api/v1/companies_controller.rb:28:in `update'
+Completed 422 Unprocessable Entity in 18ms (Views: 0.2ms | ActiveRecord: 1.0ms | Allocations: 5964)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 17:56:51 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 0.5ms | Allocations: 4328)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-09-11 17:57:22 +0300
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:17:in `respond_to_on_destroy'
+Completed 200 OK in 12ms (Views: 0.4ms | ActiveRecord: 0.6ms | Allocations: 2300)
+
+
+  [1m[36mCACHE User Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Update (41.6ms)[0m  [1m[33mUPDATE "users" SET "jti" = ? WHERE "users"."id" = ?[0m  [["jti", "eac1c186-08c7-4953-9a7a-1164b8579ab1"], ["id", 3]]
+Started POST "/users" for ::1 at 2023-09-11 17:57:31 +0300
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"user20@example.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"user20@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "user20@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "jti", "role") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "user20@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-11 14:57:31.328926"], ["updated_at", "2023-09-11 14:57:31.328926"], ["jti", "02fc54a7-5a0c-452f-9918-94de4021f2cf"], ["role", "admin"]]
+  [1m[36mTRANSACTION (16.8ms)[0m  [1m[36mcommit transaction[0m
+Completed 200 OK in 294ms (Views: 0.4ms | ActiveRecord: 17.5ms | Allocations: 5084)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-09-11 17:59:24 +0300
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:17:in `respond_to_on_destroy'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 1911)
+
+
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mUser Update (9.6ms)[0m  [1m[33mUPDATE "users" SET "jti" = ? WHERE "users"."id" = ?[0m  [["jti", "49f9fc22-6e79-49bd-9b9a-b8e3731ec21c"], ["id", 4]]
+Started GET "/member_details" for ::1 at 2023-09-11 17:59:32 +0300
+Processing by MembersController#index as */*
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms | Allocations: 225)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 18:12:46 +0300
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MembersController#index as */*
+Completed 401 Unauthorized in 3ms (ActiveRecord: 0.0ms | Allocations: 976)
+
+
+Started POST "/users" for ::1 at 2023-09-11 18:12:58 +0300
+Processing by Users::RegistrationsController#create as */*
+  Parameters: {"user"=>{"email"=>"user102@example.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"email"=>"user102@example.com", "password"=>"[FILTERED]"}}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "user102@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at", "jti", "role") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["email", "user102@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2023-09-11 15:12:59.259027"], ["updated_at", "2023-09-11 15:12:59.259027"], ["jti", "7b32740e-6aab-487e-81f4-8a9ac157bc0f"], ["role", "admin"]]
+  [1m[36mTRANSACTION (17.3ms)[0m  [1m[36mcommit transaction[0m
+Completed 200 OK in 309ms (Views: 0.5ms | ActiveRecord: 18.5ms | Allocations: 43069)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 18:14:13 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 1613)
+
+
+Started GET "/users" for 127.0.0.1 at 2023-09-11 18:22:42 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started GET "/users" for 127.0.0.1 at 2023-09-11 18:22:42 +0300
+  
+ActionController::RoutingError (No route matches [GET] "/users"):
+  
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-11 18:27:57 +0300
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "session"=>{"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 264)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-11 18:28:11 +0300
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "session"=>{"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms | Allocations: 171)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-11 18:28:14 +0300
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "session"=>{"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms | Allocations: 169)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2023-09-11 18:28:17 +0300
+Processing by Users::SessionsController#create as HTML
+  Parameters: {"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "session"=>{"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 169)
+
+
+Started GET "/member_details" for ::1 at 2023-09-11 19:11:53 +0300
+Processing by MembersController#index as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.4ms | Allocations: 1483)
+
+
+Started DELETE "/users/sign_out" for ::1 at 2023-09-11 19:12:31 +0300
+Processing by Users::SessionsController#destroy as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/users/sessions_controller.rb:17:in `respond_to_on_destroy'
+Completed 200 OK in 13ms (Views: 0.7ms | ActiveRecord: 0.3ms | Allocations: 3564)
+
+
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Update (17.5ms)[0m  [1m[33mUPDATE "users" SET "jti" = ? WHERE "users"."id" = ?[0m  [["jti", "9b17e446-32aa-42c6-aefc-8d100072b0da"], ["id", 3]]
+Started GET "/member_details" for ::1 at 2023-09-11 19:12:39 +0300
+Processing by MembersController#index as */*
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms | Allocations: 227)
+
+
+Started POST "/users" for 127.0.0.1 at 2023-09-11 19:13:28 +0300
+Processing by Users::RegistrationsController#create as HTML
+  Parameters: {"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]", "registration"=>{"name"=>"john", "email"=>"john@gmail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 3ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 1278)
+
+

@@ -8,7 +8,11 @@ class User < ApplicationRecord
 
   has_many :companies
 
-  ROLES = %w{super_admin admin manager}
+  # before_create :set_user_role
+
+  attribute :role, :string, default: 'admin'
+
+  ROLES = %w{super_admin admin manager editor collaborator}
 
   def jwt_payload
     super
@@ -20,6 +24,10 @@ class User < ApplicationRecord
       role == role_name
     end
   end
+
+  # def set_user_role
+  #   self.role = 'admin'
+  # end
 
   # def super_admin?
   #   role == 'super_admin'
