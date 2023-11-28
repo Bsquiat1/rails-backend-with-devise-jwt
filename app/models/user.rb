@@ -6,7 +6,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
+            
+
   has_many :companies
+
+  validates :name, presence: true
 
   # before_create :set_user_role
 
