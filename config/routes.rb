@@ -52,12 +52,19 @@ resources :proforma_invoices do
   resources :proforma_invoice_rows, only: [:create]
 end
 
-resources :mainlines
+# resources :mainlines
 resources :products
 
 resources :proforma_invoices do
   collection do
     delete 'destroy_all', to: 'proforma_invoices#destroy_all'
+  end
+end
+
+
+resources :mainlines do
+  collection do
+    delete 'destroy_all', to: 'mainlines#destroy_all'
   end
 end
 

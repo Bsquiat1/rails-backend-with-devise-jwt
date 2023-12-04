@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_19_142832) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_01_093124) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "established_year"
@@ -55,26 +55,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_19_142832) do
   create_table "loading_depots", force: :cascade do |t|
     t.string "name"
     t.string "location"
-    t.integer "company_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "contact"
-    t.index ["company_id"], name: "index_loading_depots_on_company_id"
   end
 
   create_table "mainlines", force: :cascade do |t|
-    t.integer "loading_depot_id", null: false
-    t.index ["loading_depot_id"], name: "index_mainlines_on_loading_depot_id"
+    t.string "fuel_type"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|
     t.integer "customer_id", null: false
-    t.integer "loading_depot_id", null: false
     t.boolean "confirmed"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"
-    t.index ["loading_depot_id"], name: "index_orders_on_loading_depot_id"
   end
 
   create_table "payments", force: :cascade do |t|
@@ -161,9 +159,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_19_142832) do
   add_foreign_key "companies", "users"
   add_foreign_key "gatepasses", "users"
   add_foreign_key "invoices", "orders"
-  add_foreign_key "mainlines", "loading_depots"
   add_foreign_key "orders", "customers"
-  add_foreign_key "orders", "loading_depots"
   add_foreign_key "payments", "invoices"
   add_foreign_key "products", "loading_depots"
   add_foreign_key "proforma_invoice_rows", "proforma_invoices"

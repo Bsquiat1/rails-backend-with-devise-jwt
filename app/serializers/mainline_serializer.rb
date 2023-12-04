@@ -1,3 +1,3 @@
 class MainlineSerializer < ActiveModel::Serializer
-  attributes :id, :name, :fuel_type
+  attributes :id, :fuel_type, :quantity
 end

@@ -37,6 +37,13 @@ class MainlinesController < ApplicationController
     @mainline.destroy
   end
 
+  def destroy_all
+    LoadingDepot.destroy_all
+
+    render json: { message: 'All Mainlines have been deleted' }
+  end
+
+
   private
 
   def set_mainline
@@ -44,7 +51,7 @@ class MainlinesController < ApplicationController
   end
 
   def mainline_params
-    params.require(:mainline).permit(:fuel_type, :quantity, loading_depots: [:name, :location, :contact])
+    params.require(:mainline).permit(:fuel_type, :quantity)
   end
 end
 

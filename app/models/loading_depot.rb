@@ -1,4 +1,4 @@
 class LoadingDepot < ApplicationRecord
-  has_many :products
-    belongs_to :mainline
+  has_many :products, dependent: :destroy
+    # belongs_to :mainline
 end

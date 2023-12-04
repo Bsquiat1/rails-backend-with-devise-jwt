@@ -103,81 +103,46 @@ require 'faker'
 #   end
 
 
-mainline_diesel = Mainline.create(fuel_type: 'Diesel', quantity: 5000)
-mainline_super = Mainline.create(fuel_type: 'Super', quantity: 2500)
-mainline_kerosene = Mainline.create(fuel_type: 'Kerosene', quantity: 4000)
-
-
-depots = [
-  {
-    name: 'VTTI',
-    location: 'Mombasa',
-    contact: 'vtti@example.com',
-    products: {
-      Diesel: 1000,
-      Super: 0,
-      Kerosene: 0,
-    },
-  },
-  {
-    name: 'GAPCO',
-    location: 'Mombasa',
-    contact: 'gapco@example.com',
-    products: {
-      Diesel: 1200,
-      Super: 600,
-      Kerosene: 900,
-    },
-  },
-  {
-    name: 'Oilcom',
-    location: 'Nairobi',
-    contact: 'oilcom@example.com',
-    products: {
-      Diesel: 800,
-      Super: 400,
-      Kerosene: 700,
-    },
-  },
-  {
-    name: 'Lake Oil',
-    location: 'Nairobi',
-    contact: 'lakeoil@example.com',
-    products: {
-      Diesel: 900,
-      Super: 450,
-      Kerosene: 750,
-    },
-  },
-  {
-    name: 'Konza',
-    location: 'Konza',
-    contact: 'konza@example.com',
-    products: {
-      Diesel: 600,
-      Super: 300,
-      Kerosene: 500,
-    },
-  },
-]
-
-depots.each do |depot_info|
-  depot = LoadingDepot.create(name: depot_info[:name], location: depot_info[:location], contact: depot_info[:contact])
-  mainline_fuel_types = depot_info[:products]
-  
-  mainline_fuel_types.each do |fuel_type, quantity|
-    mainline = case fuel_type
-               when 'Diesel'
-                 mainline_diesel
-               when 'Super'
-                 mainline_super
-               when 'Kerosene'
-                 mainline_kerosene
-               end
-    Product.create(name: "#{fuel_type} Product", quantity: quantity, mainline: mainline, loading_depot: depot)
-  end
-end
 
 
 
-puts "Seed data generated successfully!"
+
+
+
+
+
+# # Create mainlines
+# Mainline.create([
+#   { fuel_type: 'Diesel', quantity: 5000 },
+#   { fuel_type: 'Super', quantity: 2500 },
+#   { fuel_type: 'Kerosene', quantity: 4000 }
+# ])
+
+# Create loading depots
+# LoadingDepot.create([
+#   { name: 'VTTI', location: 'Mombasa',  contact: 'vtti@example.com'},
+#   { name: 'GAPCO', location: 'Mombasa', contact: 'gapco@example.com'},
+#   { name: 'Oilcom', location: 'Nairobi', contact: 'oilcom@example.com' },
+#   { name: 'Lake Oil', location: 'Nairobi',  contact: 'lakeoil@example.com'},
+#   { name: 'Konza', location: 'Konza', contact: 'konza@example.com'}
+# ])
+
+# # Create products for each loading depot
+# Product.create([
+#   { name: 'Diesel', quantity: 1000, loading_depot_id: 1 },
+#   { name: 'Super', quantity: 0, loading_depot_id: 1 },
+#   { name: 'Kerosene', quantity: 0, loading_depot_id: 1 },
+#   { name: 'Diesel', quantity: 1200, loading_depot_id: 2 },
+#   { name: 'Super', quantity: 600, loading_depot_id: 2 },
+#   { name: 'Kerosene', quantity: 900, loading_depot_id: 2 },
+#   { name: 'Diesel', quantity: 800, loading_depot_id: 3 },
+#   { name: 'Super', quantity: 400, loading_depot_id: 3 },
+#   { name: 'Kerosene', quantity: 700, loading_depot_id: 3 },
+#   { name: 'Diesel', quantity: 900, loading_depot_id: 4 },
+#   { name: 'Super', quantity: 450, loading_depot_id: 4 },
+#   { name: 'Kerosene', quantity: 750, loading_depot_id: 4 },
+#   { name: 'Diesel', quantity: 600, loading_depot_id: 5 },
+#   { name: 'Super', quantity: 300, loading_depot_id: 5 },
+#   { name: 'Kerosene', quantity: 500, loading_depot_id: 5 }
+# ])
+
