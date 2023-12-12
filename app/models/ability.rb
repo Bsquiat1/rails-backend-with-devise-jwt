@@ -10,6 +10,7 @@ class Ability
       # can :read, Company, user_id: user.id
       # can :update, Company, user_id: user.id
       can [:read, :update], Company, user_id: user.id
+      
     end
   end
 end

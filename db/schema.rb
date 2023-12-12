@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_01_093124) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_07_140547) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "established_year"
@@ -37,6 +37,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_01_093124) do
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "depot"
+    t.string "product_type"
+    t.integer "quantity_leaving"
+    t.string "destination"
+    t.string "vehicle_details"
+    t.datetime "issued_at"
+    t.string "issued_by"
     t.index ["user_id"], name: "index_gatepasses_on_user_id"
   end
 

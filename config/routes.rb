@@ -37,8 +37,9 @@ end
 # resources :loading_depots
 resources :proforma_invoices
 resources :invoices
-resources :gate_passes, only: [:create]
+resources :gatepasses
 resources :supplier_invoices
+resources :users
 
 resources :proforma_invoices do
   member do
